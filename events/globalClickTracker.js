@@ -1,4 +1,4 @@
-export const initializeClickTracker = () => {
+export const initializeGlobalClickTracker = () => {
     const trackUserClicks = (e) => {
         const currentClickPosition = {
             x: e.clientX,
@@ -7,7 +7,7 @@ export const initializeClickTracker = () => {
 
         const pastClickDetails =
             JSON.parse(
-                sessionStorage.getItem("global-event-userClickDetails")
+                sessionStorage.getItem("global-event-userGlobalClickDetails")
             ) ?? {};
 
         const newCount = parseInt(pastClickDetails.clickCount ?? 0) + 1;
@@ -17,14 +17,14 @@ export const initializeClickTracker = () => {
         ];
 
         sessionStorage.setItem(
-            "global-event-userClickDetails",
+            "global-event-userGlobalClickDetails",
             JSON.stringify({
                 clickCount: newCount,
                 positions: newClickPositions,
             })
         );
 
-        const event = new CustomEvent("userClickCount", {
+        const event = new CustomEvent("globalClickCount", {
             detail: {
                 count: newCount,
                 currentPosition: currentClickPosition,
