@@ -1,4 +1,4 @@
-export const initializeElementClickTracker = (
+export const initializeElementsClickTracker = (
     query,
     callback = (count, element, event) => {}
 ) => {
@@ -10,7 +10,7 @@ export const initializeElementClickTracker = (
         // Run callback
         callback(clickCount, e.target, e);
 
-        const event = new CustomEvent("elementClicksCount", {
+        const event = new CustomEvent("elementsClickCount", {
             detail: {
                 count: clickCount,
                 element: e.target,
@@ -22,6 +22,8 @@ export const initializeElementClickTracker = (
     };
 
     document
-        .querySelector(query)
-        ?.addEventListener("click", trackElementClicks);
+        .querySelectorAll(query)
+        .forEach((element) =>
+            element.addEventListener("click", trackElementClicks)
+        );
 };

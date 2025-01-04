@@ -1,13 +1,14 @@
 import { initializeGlobalClickTracker } from "./events/globalClickTracker.js";
 import { initializePageViewTracker } from "./events/pageViewsTracker.js";
 import { initializeElementClickTracker } from "./events/elementClickTracker.js";
+import { initializeElementsClickTracker } from "./elementsClickTracker.js";
 
 // Select Element
 const $ = (query) => {
     return document.querySelector(query);
 };
 
-// Initialize User Clicks
+// [*]: Initialize User Clicks
 initializeGlobalClickTracker();
 
 // Function to visualize the click/touch on the screen
@@ -28,20 +29,31 @@ window.addEventListener("globalClickCount", (e) => {
     // visualizeClick(e.detail.currentPosition);
 });
 
-// Initialize Page view tracker
+// [*]: Initialize Page view tracker
 initializePageViewTracker();
 
 window.addEventListener("pageViewCount", (e) => {
     console.log(`[${e.detail.count}] Current URL:`, e.detail.currentUrl);
 });
 
-// Initialize element click tracker
+// [*]: Initialize element click tracker
 initializeElementClickTracker("#click-elm-1", (count, element, event) => {
     element.innerText = "Clicked Me " + count + " times!";
 });
 
 initializeElementClickTracker("#click-elm-2", (count, element, event) => {
     element.innerText = "Clicked Me " + count + " times!";
+});
+
+// Check the Event
+window.addEventListener("elementClicksCount", (e) => {
+    console.log(`Clicked [${e.detail.count}]:`, e.detail.element);
+});
+
+// [*]: Initialize Elements click tracker
+// Selector: button:not([id]) -> Every button without an ID
+initializeElementsClickTracker("button:not([id])", (count, element, event) => {
+    element.innerText = "Clicked Elements " + count + " times!";
 });
 
 // Check the Event
