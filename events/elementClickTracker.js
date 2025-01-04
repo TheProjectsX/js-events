@@ -4,12 +4,13 @@ export const initializeElementClickTracker = (
 ) => {
     let clickCount = 0;
 
-    const trackElementClicks = (e) => {
+    const handleElementClickEvent = (e) => {
         clickCount++;
 
         // Run callback
         callback(clickCount, e.target, e);
 
+        // Dispatch Event
         const event = new CustomEvent("elementClicksCount", {
             detail: {
                 count: clickCount,
@@ -23,5 +24,5 @@ export const initializeElementClickTracker = (
 
     document
         .querySelector(query)
-        ?.addEventListener("click", trackElementClicks);
+        ?.addEventListener("click", handleElementClickEvent);
 };

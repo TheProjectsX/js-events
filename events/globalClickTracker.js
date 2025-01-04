@@ -1,5 +1,7 @@
-export const initializeGlobalClickTracker = () => {
-    const trackUserClicks = (e) => {
+export const initializeGlobalClickTracker = (
+    callback = (clickCount, currentPosition, positions) => {}
+) => {
+    const handleUserClickEvent = (e) => {
         const currentClickPosition = {
             x: e.clientX,
             y: e.clientY,
@@ -24,6 +26,10 @@ export const initializeGlobalClickTracker = () => {
             })
         );
 
+        // Run Callback
+        callback(newCount, currentClickPosition, newClickPositions);
+
+        // Dispatch Event
         const event = new CustomEvent("globalClickCount", {
             detail: {
                 count: newCount,
@@ -35,5 +41,5 @@ export const initializeGlobalClickTracker = () => {
         window.dispatchEvent(event);
     };
 
-    window.addEventListener("click", trackUserClicks);
+    window.addEventListener("click", handleUserClickEvent);
 };

@@ -91,11 +91,11 @@ initializeScrollTracker();
 
 // Check the Event
 window.addEventListener("scrolled", (e) => {
-    console.table({
-        percentage: e.detail.percentage,
-        pixels: e.detail.pixels,
-        pageHeight: e.detail.pageHeight,
-    });
+    // console.table({
+    //     percentage: e.detail.percentage,
+    //     pixels: e.detail.pixels,
+    //     pageHeight: e.detail.pageHeight,
+    // });
 
     $("#scrollIndicator").innerText = `${e.detail.percentage}%`;
 });

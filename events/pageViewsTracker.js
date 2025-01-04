@@ -1,5 +1,7 @@
-export const initializePageViewTracker = () => {
-    const trackPageView = () => {
+export const initializePageViewTracker = (
+    callback = (count, currentUrl, visitedUrls) => {}
+) => {
+    const handlePageViewEvent = () => {
         const currentUrl = window.location.href;
 
         const pastPageDetails =
@@ -30,6 +32,10 @@ export const initializePageViewTracker = () => {
             })
         );
 
+        // Run Callback
+        callback(newCount, currentUrl, newVisitedUrls);
+
+        // Dispatch Event
         const event = new CustomEvent("pageViewCount", {
             detail: {
                 count: newCount,
@@ -41,7 +47,7 @@ export const initializePageViewTracker = () => {
         window.dispatchEvent(event);
     };
 
-    window.addEventListener("load", trackPageView);
+    window.addEventListener("load", handlePageViewEvent);
 };
 
 // TODO:

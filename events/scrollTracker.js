@@ -1,5 +1,5 @@
 export const initializeScrollTracker = () => {
-    const trackScroll = () => {
+    const handleScrollEvent = () => {
         const scrollPosition = window.scrollY;
         const totalPageHeight = document.documentElement.scrollHeight;
 
@@ -21,5 +21,5 @@ export const initializeScrollTracker = () => {
         window.dispatchEvent(event);
     };
 
-    window.addEventListener("scroll", trackScroll);
+    window.addEventListener("scroll", handleScrollEvent);
 };
