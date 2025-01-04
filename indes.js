@@ -1,7 +1,7 @@
 import { initializeGlobalClickTracker } from "./events/globalClickTracker.js";
 import { initializePageViewTracker } from "./events/pageViewsTracker.js";
 import { initializeElementClickTracker } from "./events/elementClickTracker.js";
-import { initializeElementsClickTracker } from "./elementsClickTracker.js";
+import { initializeElementsClickTracker } from "./events/elementsClickTracker.js";
 
 // Select Element
 const $ = (query) => {
