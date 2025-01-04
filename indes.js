@@ -3,6 +3,7 @@ import { initializePageViewTracker } from "./events/pageViewsTracker.js";
 import { initializeElementClickTracker } from "./events/elementClickTracker.js";
 import { initializeElementsClickTracker } from "./events/elementsClickTracker.js";
 import { initializeInactivityTracker } from "./events/inactivityTracker.js";
+import { initializeScrollTracker } from "./events/scrollTracker.js";
 
 // Select Element
 const $ = (query) => {
@@ -63,17 +64,18 @@ window.addEventListener("elementsClickCount", (e) => {
 });
 
 // [*]: Initialize track Inactivity of Webpage
-initializeInactivityTracker(
-    4,
-    (inactivityTime) => {
-        console.log(
-            "This is from Direct Callback. Time",
-            inactivityTime,
-            "seconds"
-        );
-    },
-    true
-);
+// Stopping from Checking Inactivity. (We are developing now, man!)
+// initializeInactivityTracker(
+//     4,
+//     (inactivityTime) => {
+//         console.log(
+//             "This is from Direct Callback. Time",
+//             inactivityTime,
+//             "seconds"
+//         );
+//     },
+//     true
+// );
 
 // Check the Event
 window.addEventListener("userInactivityDetected", (e) => {
@@ -82,4 +84,18 @@ window.addEventListener("userInactivityDetected", (e) => {
         e.detail.inactivityTime,
         "seconds"
     );
+});
+
+// [*]: Initialize track scroll of webpage
+initializeScrollTracker();
+
+// Check the Event
+window.addEventListener("scrolled", (e) => {
+    console.table({
+        percentage: e.detail.percentage,
+        pixels: e.detail.pixels,
+        pageHeight: e.detail.pageHeight,
+    });
+
+    $("#scrollIndicator").innerText = `${e.detail.percentage}%`;
 });

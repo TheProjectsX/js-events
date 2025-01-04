@@ -19,6 +19,30 @@
                     -50%
                 ); /* Center the marker on the position */
             }
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 200vh; /* Make page 2x the height of the viewport */
+                position: relative;
+            }
+
+            .content {
+                padding: 20px;
+                background-color: #f0f0f0;
+                height: 1500px; /* Content section */
+            }
+
+            .scroll-indicator {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 100;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+            }
         </style>
 
         <title>Document</title>
@@ -38,5 +62,8 @@
         <button>Button 2</button>
         <button>Button 3</button>
         <button>Button 4</button>
+
+        <!-- Scroll percentage output -->
+        <div class="scroll-indicator" id="scrollIndicator">0%</div>
     </body>
 </html>
