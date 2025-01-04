@@ -2,6 +2,7 @@ import { initializeGlobalClickTracker } from "./events/globalClickTracker.js";
 import { initializePageViewTracker } from "./events/pageViewsTracker.js";
 import { initializeElementClickTracker } from "./events/elementClickTracker.js";
 import { initializeElementsClickTracker } from "./events/elementsClickTracker.js";
+import { initializeInactivityTracker } from "./events/inactivityTracker.js";
 
 // Select Element
 const $ = (query) => {
@@ -59,4 +60,26 @@ initializeElementsClickTracker("button:not([id])", (count, element, event) => {
 // Check the Event
 window.addEventListener("elementsClickCount", (e) => {
     console.log(`Clicked [${e.detail.count}]:`, e.detail.element);
+});
+
+// [*]: Initialize track Inactivity of Webpage
+initializeInactivityTracker(
+    4,
+    (inactivityTime) => {
+        console.log(
+            "This is from Direct Callback. Time",
+            inactivityTime,
+            "seconds"
+        );
+    },
+    true
+);
+
+// Check the Event
+window.addEventListener("userInactivityDetected", (e) => {
+    console.log(
+        "This is from Event Listener Callback. Time",
+        e.detail.inactivityTime,
+        "seconds"
+    );
 });

@@ -4,7 +4,7 @@ export const initializeElementsClickTracker = (
 ) => {
     let clickCount = 0;
 
-    const trackElementClicks = (e) => {
+    const trackElementsClick = (e) => {
         clickCount++;
 
         // Run callback
@@ -24,6 +24,6 @@ export const initializeElementsClickTracker = (
     document
         .querySelectorAll(query)
         .forEach((element) =>
-            element.addEventListener("click", trackElementClicks)
+            element.addEventListener("click", trackElementsClick)
         );
 };
