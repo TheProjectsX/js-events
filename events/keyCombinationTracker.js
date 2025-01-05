@@ -44,7 +44,10 @@ export const initializeKeyCombinationTracker = (
             return;
         }
 
+        // Run Callback
         callback(keys, e);
+
+        // Dispatch Event
         const event = new CustomEvent("keyCombinationPressed", {
             detail: {
                 keys,

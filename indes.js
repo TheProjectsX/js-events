@@ -7,6 +7,7 @@ import { initializeScrollTracker } from "./events/scrollTracker.js";
 import { initializeUserTime, getUserTime } from "./events/userVisitTime.js";
 import { initializeElementVisibilityTracker } from "./elementVisibilityTracker.js";
 import { initializeKeyCombinationTracker } from "./events/keyCombinationTracker.js";
+import { initializeNetworkStatusTracker } from "./events/networkStatusTracker.js";
 
 // Select Element
 const $ = (query) => {
@@ -138,4 +139,14 @@ window.addEventListener("keyCombinationPressed", (e) => {
         (key) => `<kbd>${key}</kbd>`
     )}`;
     $("#keyCombinations").style.display = "block";
+});
+
+// [*]: Initialize Network status Stacker
+initializeNetworkStatusTracker((status) =>
+    console.log("Status from callback:", status)
+);
+
+// Check Event
+window.addEventListener("networkStatusChange", (e) => {
+    $("#networkStatus").innerText = `Network Status: ${e.detail.status}`;
 });
