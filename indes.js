@@ -4,6 +4,9 @@ import { initializeElementClickTracker } from "./events/elementClickTracker.js";
 import { initializeElementsClickTracker } from "./events/elementsClickTracker.js";
 import { initializeInactivityTracker } from "./events/inactivityTracker.js";
 import { initializeScrollTracker } from "./events/scrollTracker.js";
+import { initializeUserTime, getUserTime } from "./events/userVisitTime.js";
+import { initializeElementVisibilityTracker } from "./elementVisibilityTracker.js";
+import { initializeKeyCombinationTracker } from "./events/keyCombinationTracker.js";
 
 // Select Element
 const $ = (query) => {
@@ -98,4 +101,41 @@ window.addEventListener("scrolled", (e) => {
     // });
 
     $("#scrollIndicator").innerText = `${e.detail.percentage}%`;
+});
+
+// [*]: Initialize user visit time
+initializeUserTime();
+
+// Check user Visit Time
+setTimeout(() => {
+    const visitTime = getUserTime();
+
+    console.log(visitTime);
+}, 1500);
+
+// [*]: Initialize Element Visibility Tracker
+initializeElementVisibilityTracker("#isVisible", (element, isVisible) => {
+    if (isVisible) {
+        console.log(element, "is Visible (From callback)");
+    }
+});
+
+// Check Event
+window.addEventListener("elementVisible", (e) => {
+    if (e.detail.isVisible) {
+        console.log(e.detail.element, "is Visible (From event)");
+    }
+});
+
+// [*]: Initialize key combination tracker
+initializeKeyCombinationTracker(["alt", "ctrl", "k"], (keys, event) => {
+    console.log("Keys pressed!", keys);
+});
+
+// Check Event
+window.addEventListener("keyCombinationPressed", (e) => {
+    $("#keyCombinations").innerHTML = `Pressed: ${e.detail.keys.map(
+        (key) => `<kbd>${key}</kbd>`
+    )}`;
+    $("#keyCombinations").style.display = "block";
 });
