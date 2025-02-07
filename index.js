@@ -5,7 +5,7 @@ import { initializeElementsClickTracker } from "./events/elementsClickTracker.js
 import { initializeInactivityTracker } from "./events/inactivityTracker.js";
 import { initializeScrollTracker } from "./events/scrollTracker.js";
 import { initializeUserTime, getUserTime } from "./events/userVisitTime.js";
-import { initializeElementVisibilityTracker } from "./elementVisibilityTracker.js";
+import { initializeElementVisibilityTracker } from "./events/elementVisibilityTracker.js";
 import { initializeKeyCombinationTracker } from "./events/keyCombinationTracker.js";
 import { initializeNetworkStatusTracker } from "./events/networkStatusTracker.js";
 
