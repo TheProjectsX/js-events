@@ -5,14 +5,12 @@ const useElementClickTracker = () => {
 
     const [clickData, setClickData] = useState({
         count: 0,
-        element: null,
         event: null,
     });
 
     const handleElementClicked = (event) =>
         setClickData((prev) => ({
             count: prev.count + 1,
-            element: event.target,
             event: event,
         }));
 
