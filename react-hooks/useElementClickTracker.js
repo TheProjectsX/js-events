@@ -18,14 +18,6 @@ export default function useElementClickTracker(query) {
         const element = document.querySelector(query);
         if (!element) return;
 
-        const handleElementClicked = (event) => {
-            setClickData((prev) => ({
-                count: prev.count + 1,
-                element: event.target,
-                event: event,
-            }));
-        };
-
         element.addEventListener("click", handleElementClicked);
 
         return () => {
