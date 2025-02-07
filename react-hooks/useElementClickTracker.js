@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function useElementClickTracker(query) {
+const useElementClickTracker = () => {
+    const elementRef = useRef(null);
+
     const [clickData, setClickData] = useState({
         count: 0,
         element: null,
@@ -15,15 +17,19 @@ export default function useElementClickTracker(query) {
         }));
 
     useEffect(() => {
-        const element = document.querySelector(query);
-        if (!element) return;
+        if (!elementRef.current) return;
 
-        element.addEventListener("click", handleElementClicked);
+        elementRef.current.addEventListener("click", handleElementClicked);
 
         return () => {
-            element.removeEventListener("click", handleElementClicked);
+            elementRef.current?.removeEventListener(
+                "click",
+                handleElementClicked
+            );
         };
-    }, [query]);
+    }, [elementRef]);
 
-    return { ...clickData, elementClicked: handleElementClicked };
-}
+    return { elementRef, ...clickData, elementClicked: handleElementClicked };
+};
+
+export default useElementClickTracker;
