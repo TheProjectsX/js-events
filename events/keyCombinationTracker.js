@@ -22,8 +22,6 @@ export const initializeKeyCombinationTracker = (
         ),
     ];
 
-    console.log(keys);
-
     // Function to check key combination
     const checkKeyCombo = (e) => {
         // Skip if the key is a modifier or not in the target keys

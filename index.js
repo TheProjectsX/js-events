@@ -100,7 +100,7 @@ window.addEventListener("scrolled", (e) => {
     //     pixels: e.detail.pixels,
     //     pageHeight: e.detail.pageHeight,
     // });
-
+    console.log(e.detail);
     $("#scrollIndicator").innerText = `${e.detail.percentage}%`;
 });
 
