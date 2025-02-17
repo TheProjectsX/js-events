@@ -1,4 +1,6 @@
 export const initializeScrollTracker = () => {
+    let lastScrollPosition = window.scrollY;
+
     const handleScrollEvent = () => {
         const scrollPosition = window.scrollY;
         const totalPageHeight = document.documentElement.scrollHeight;
@@ -10,11 +12,16 @@ export const initializeScrollTracker = () => {
             ).toFixed(2)
         );
 
+        const scrollDirection =
+            scrollPosition > lastScrollPosition ? "down" : "up";
+        lastScrollPosition = scrollPosition;
+
         const event = new CustomEvent("scrolled", {
             detail: {
                 percentage: scrollPercentage,
                 pixels: scrollPosition,
                 pageHeight: totalPageHeight,
+                direction: scrollDirection,
             },
         });
 
